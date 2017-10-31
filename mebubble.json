@@ -1,0 +1,18 @@
+{
+"children":
+[
+	{"name" : "冰淇淋"		,		"weight": 100},
+	{"name" : "雪糕"			,		"weight": 100},
+	{"name" : "菠萝咕咾肉"	, 		"weight": 100},
+	{"name" : "糖醋里脊"		,		"weight": 3000},
+	{"name" : "彭于晏"		,		"weight": 300},
+	{"name" : "陈坤"			,		"weight": 300},
+	{"name" : "吴彦祖"		,		"weight": 300},
+	{"name" : "C4D"			,		"weight": 300},
+	{"name" : "p5.js"		,		"weight": 400},
+	{"name" : "D3.js"		,		"weight": 400},
+	{"name" : "endless"		,		"weight": 500}
+]
+}
+
+//这是一个数组，不符合层级结构。我们只需在其最外层套一个根节点，就可以使其符合了。根节点可以不具有任何属性。

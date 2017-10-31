@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>d3.chart.sankey (product demo)</title>
+    <script src="https://unpkg.com/d3-array@1"></script>
+    <script src="https://unpkg.com/d3-collection@1"></script>
+    <script src="https://unpkg.com/d3-path@1"></script>
+    <script src="https://unpkg.com/d3-shape@1"></script>
+    <script src="https://unpkg.com/d3-sankey@0"></script>
+    <script>
+    var sankey = d3.sankey();
+    </script>
+
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.rawgit.com/newrelic-forks/d3-plugins-sankey/master/sankey.js"></script>
+    <script src="https://cdn.rawgit.com/misoproject/d3.chart/master/d3.chart.min.js"></script>
+    <script src="https://cdn.rawgit.com/q-m/d3.chart.sankey/master/d3.chart.sankey.min.js"></script>
+    <style>
+      body {
+        padding: 10px;
+        min-width: 600px;
+        max-width: 1200px;
+        margin: auto;
+      }
+      #chart {
+        height: 500px;
+        font: 13px sans-serif;
+      }
+      .node rect {
+        fill-opacity: .9;
+        shape-rendering: crispEdges;
+        stroke-width: 0;
+      }
+      .node text {
+        text-shadow: 0 1px 0 #fff;
+      }
+      .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .2;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart"></div>
+    <p>wqe</p>
+
+    <script>
+      var colors = {
+            'Austria':              '#edbd00',
+            'Belgium':              '#367d85',
+            'Bulgaria':             '#97ba4c',
+            'Croatia':              '#f5662b',
+            'Cyprus':               '#3f3e47',
+            'Czech Republic':       '#9f9fa3',
+            'Denmark':              '#edbd00',
+            'Estonia':              '#367d85',
+            'Finland':              '#97ba4c',
+            'France':               '#f5662b',
+            'Germany':              '#3f3e47',
+            'Greece':               '#9f9fa3',
+            'Hungary':              '#edbd00',
+            'Ireland':              '#367d85',
+            'Italy':                '#97ba4c',
+            'Latvia':               '#f5662b',
+            'Lithuania':            '#3f3e47',
+            'Luxembourg':           '#9f9fa3',
+            'Malta':                '#3f3e47',
+            'Netherlands':          '#9f9fa3',
+            'Poland':               '#edbd00',
+            'Portugal':             '#367d85',
+            'Romania':              '#97ba4c',
+            'Slovakia':             '#f5662b',
+            'Slovenia':             '#3f3e47',
+            'Spain':                '#9f9fa3',
+            'Sweden':               '#3f3e47',
+            'United Kingdom':       '#9f9fa3'
+          };
+      d3.json("web.json", function(error, json) {
+        var chart = d3.select("#chart").append("svg").chart("Sankey.Path");
+        chart
+          .name(label)
+          .colorNodes(function(name, node) {
+            return color(node, 1) || colors.fallback;
+          })
+          .colorLinks(function(link) {
+            return color(link.source, 4) || color(link.target, 1) || colors.fallback;
+          })
+          .nodeWidth(15)
+          .nodePadding(10)
+          .spread(true)
+          .iterations(0)
+          .draw(json);
+        function label(node) {
+          return node.name.replace(/\s*\(.*?\)$/, '');
+        }
+        function color(node, depth) {
+          var id = node.id.replace(/(_score)?(_\d+)?$/, '');
+          if (colors[id]) {
+            return colors[id];
+          } else if (depth > 0 && node.targetLinks && node.targetLinks.length == 1) {
+            return color(node.targetLinks[0].source, depth-1);
+          } else {
+            return null;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

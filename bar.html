@@ -1,0 +1,1472 @@
+<html> 
+  <head> 
+        <meta charset="utf-8"> 
+        <title>HelloWorld</title> 
+        <style type="text/css">
+        	.axis path,
+        	.axis line{
+        		fill:none;
+        		stroke: #000;
+        		shape-rendering: crispEdges;
+        	}
+        	svg{
+        		width:1000;
+        		height:1000;
+        	}
+	        .axis text {
+			    font-family: sans-serif;
+			    font-size: 11px;
+			}
+
+			.myRect {
+
+			}
+
+			.myText {
+				fill: white;
+				text-anchor: middle;
+			}
+			.node circle {
+			  fill: #aaffaa;
+			  stroke: #548687;
+			  stroke-width: 1.5px;
+			}
+
+			.node {
+			  font: 1em sans-serif;
+			}
+
+			.link {
+			  fill: none;
+			  stroke: #8FBC94;
+			  stroke-width: 1.5px;
+			}
+			.bubble circle{
+				stroke: null;
+/*				stroke-width: 2px;
+*/				opacity: 0.4;
+			}
+
+			.bubble text{
+				fill: black;
+				font-size: 14px;
+				font-family: arial;
+				text-anchor: middle;
+			}
+
+
+        </style>
+  </head> 
+    <body> 
+    		<h1 style="text-align: center;">本猹脑部组成内容</h1>
+
+
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> 
+        <script>  
+        //选择
+   //      	var a = "I'm fine";
+			// var dataset=["I","am",3];
+
+			// var body = d3.select("body");
+			// var p = body.selectAll("p");
+
+			// var p1 = d3.select("body").select("p");
+			// var p2 = body.select("#myId");
+			// var p3 = body.selectAll(".myClass");
+
+			// p2.style("color","red");
+			// p3.style("font-size","32");
+
+
+			// p.data(dataset)
+			//   .text(function(d, i){
+			//       return d;
+			//   });
+
+			// body.append("p")
+			//     .text("Are");
+			 
+   //          body.insert("p","#myId")
+   //           .text("you");
+
+   //          p1.remove();
+
+			//t("p");			
+			//p.datum(a);
+			// p.text(function(d, i){
+			//     return "第 "+ i + " 个元素绑定的数据是 " + d;
+			// });
+
+
+
+
+//bar chart
+
+			// var rectHeight = 25;   //每个矩形所占的像素高度(包括空白)
+			// var width = 300;  //画布的宽度
+			// var height = 300;   //画布的高度
+
+			// var svg = d3.select("body")     //选择文档中的body元素
+		 //    .append("svg")          //添加一个svg元素
+		 //    .attr("width", width)       //设定宽度
+		 //    .attr("height", height);    //设定高度
+
+
+			// var dataset = [10,200,30,400,20,22,332];//数据（表示矩形的宽度）
+
+			// svg.selectAll("rect")
+			//    .data(dataset)
+			//    .enter()
+			//    .append("rect")
+			//    .attr("x",20)
+			//    .attr("y",function(d,i){
+			//    	return i*rectHeight;
+			//    })
+			//    .attr("width",function(d){
+			//    	return d;
+			//    })
+			//    .attr("height",rectHeight-2)
+			//    .attr("fill","#930344");
+//基本概念
+		// //update.  enter
+		// 	var dataset = [ 3 , 6 , 9 , 12 , 15 ];
+
+		// 	//选择body中的p元素
+		// 	var p = d3.select("body").selectAll("p");
+
+		// 	//获取update部分
+		// 	var update = p.data(dataset);
+
+		// 	//获取enter部分
+		// 	var enter = update.enter();
+
+		// 	//update部分的处理：更新属性值
+		// 	update.text(function(d){
+		// 	    return "update " + d;
+		// 	});
+
+		// 	//enter部分的处理：添加元素后赋予属性值
+		// 	enter.append("p")
+		// 	    .text(function(d){
+		// 	        return "enter " + d;
+		// 	    });
+		// //update exit
+
+		// 	var dataset = [ 3 ];
+
+		// 	//选择body中的p元素
+		// 	var p = d3.select("body").selectAll("p");
+
+		// 	//获取update部分
+		// 	var update = p.data(dataset);
+
+		// 	//获取exit部分
+		// 	var exit = update.exit();
+
+		// 	//update部分的处理：更新属性值
+		// 	update.text(function(d){
+		// 	    return "update " + d;
+		// 	});
+
+		// 	//exit部分的处理：修改p元素的属性
+		// 	exit.text(function(d){
+		// 	        return "exit";
+		// 	 });
+
+		// 	//exit部分的处理通常是删除元素
+			// exit.remove();
+
+//比例尺
+			// var dataset = [2.3, 3.3, 4.2, 0.2, 4.4, 2.4, 2.2, 1.2];
+			// var color = ["#1E3140","#19515C","#10736F","#2C9677","#60B773","#A1D668","#EEEF61","#000"];
+			// //线性比例尺
+			// var linear = d3.scale.linear()
+			// 					 .domain([0, d3.max(dataset)])
+			// 					 .range([0,300]);
+			// //序数比例尺
+			// var ordinal = d3.scale.ordinal()
+			// 					  .domain(dataset)
+			// 					  .range(color);
+
+			// var rectHeight = 35;
+			// var svg = d3.select("body")
+			// 			.append("svg")
+			// 			.attr("width",1000)
+			// 			.attr("height",1000);
+
+////有数据，而没有足够图形元素的时候，使用此方法可以添加足够的元素
+			// svg.selectAll("rect")
+			//    .data(dataset)
+			//    .enter()
+			//    .append("rect")
+			//    .attr("x",40)
+			//    .attr("y",function(d,i){
+			//    	return i*rectHeight;
+			//    })
+			//    .attr("width",function(d){
+			//    	return linear(d);
+			//    })
+			//    .attr("height", rectHeight-5)
+			//    .attr("fill",function(d){
+			//    	return ordinal(d);
+			//    });
+
+//坐标轴
+
+   //          var dataset = [2.3, 3.3, 4.2, 0.2, 4.4, 2.4, 2.2];
+   //          var color = ["#1E3140","#19515C","#10736F","#2C9677","#60B773","#A1D668","#EEEF61"];
+   //          var linear = d3.scale.linear()
+   //          					 .domain([0,d3.max(dataset)])
+   //          					 .range([1,600]);
+   //          var ordinal = d3.scale.ordinal()
+   //          					  .domain(dataset)
+   //          					  .range(color);
+
+   //          var rectHeight = 35;
+   //          var svg = d3.selectAll("body")
+   //          	        .append("svg");
+
+   //          var xAxis = d3.svg.axis()
+   //          			      .orient("bottom")
+   //          			      .scale(linear)
+   //          			      .ticks(10);
+   //          var yAxis = d3.svg.axis()
+   //          				  .orient("left")
+   //          				  .scale(linear)
+   //          				  .ticks(7);
+
+   //          svg.selectAll("rect")
+   //             .data(dataset)
+   //             .enter()
+   //             .append("rect")
+   //             .attr("x",60)
+   //             .attr("y",function(d,i){
+   //             		return i*rectHeight;
+   //             })
+   //             .attr("width",function(d){
+   //             		return linear(d)*0.8;
+   //             })
+   //             .attr("height",rectHeight-5)
+   //             .attr("fill",function(d){
+   //             		return ordinal(d);
+   //             });
+
+
+
+			// svg.append("g")
+			// 	.attr("class","axis")
+			// 	.attr("transform","translate(60,280)")
+			// 	.call(xAxis);
+
+
+
+//动态效果
+			// var svg = d3.select("body")
+			// 			.append("svg")
+			// 			.attr("width",1000)
+			// 			.attr("height",1000);
+
+			// var circle1 = svg.append("circle")
+			// 				.attr("cx",100)
+			// 				.attr("cy",100)
+			// 				.attr("r",45)
+			// 				.style("fill","#60B773")
+			// 				.transition()
+			// 				.delay(200)
+			// 				.duration(1000)
+			// 				.ease("elastic")
+			// 				.attr("cx",300);
+
+			// var circle2 = svg.append("circle")
+			// 				.attr("cx",100)
+			// 				.attr("cy",200)
+			// 				.attr("r",45)
+			// 				.style("fill","#60B773")
+			// 				.transition()
+			// 				.delay(200)
+			// 				.duration(1000)
+			// 				.ease("circle")
+			// 				.attr("cx",300);
+
+			// var circle3 = svg.append("circle")
+			// 				.attr("cx",100)
+			// 				.attr("cy",300)
+			// 				.attr("r",45)
+			// 				.style("fill","#60B773")
+			// 				.transition()
+			// 				.delay(200)
+			// 				.duration(1000)
+			// 				.ease("elastic")
+			// 				.attr("cx",300)
+			// 				.style("fill","#19515C");
+
+			// var circle4 = svg.append("circle")
+			// 				.attr("cx",100)
+			// 				.attr("cy",400)
+			// 				.attr("r",45)
+			// 				.style("fill","#60B773")
+			// 				.transition()
+			// 				.delay(200)
+			// 				.duration(1000)
+			// 				.ease("linear")
+			// 				.attr("cx",300)
+			// 				.attr("r",20);
+
+
+//在 D3 中，每一个选择集都有 on() 函数，用于添加事件监听器。
+
+// on() 的第一个参数是监听的事件，第二个参数是监听到事件后响应的内容，第二个参数是一个函数。
+
+// 鼠标常用的事件有：
+
+// click：鼠标单击某元素时，相当于 mousedown 和 mouseup 组合在一起。
+// mouseover：光标放在某元素上。
+// mouseout：光标从某元素上移出来时。
+// mousemove：鼠标被移动的时候。
+// mousedown：鼠标按钮被按下。
+// mouseup：鼠标按钮被松开。
+// dblclick：鼠标双击。
+// 键盘常用的事件有三个：
+
+// keydown：当用户按下任意键时触发，按住不放会重复触发此事件。该事件不会区分字母的大小写，例如“A”和“a”被视为一致。
+// keypress：当用户按下字符键（大小写字母、数字、加号、等号、回车等）时触发，按住不放会重复触发此事件。该事件区分字母的大小写。
+// keyup：当用户释放键时触发，不区分字母的大小写。
+// 触屏常用的事件有三个：
+
+// touchstart：当触摸点被放在触摸屏上时。
+// touchmove：当触摸点在触摸屏上移动时。
+// touchend：当触摸点从触摸屏上拿开时。
+//当某个事件被监听到时，D3 会把当前的事件存到 d3.event 对象，里面保存了当前事件的各种参数
+
+//完整的bar chart
+// 			var width = 400;
+// 			var height = 400;
+
+//     var w = window,
+//     d = document,
+//     e = d.documentElement,
+//     x = w.innerWidth || e.clientWidth || g.clientWidth,
+//     y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+// var svg = d3.select("body")
+//             .append("svg")
+//             .attr("width", x)
+//             .attr("height", y);
+
+// function updateWindow(){
+//     x = w.innerWidth || e.clientWidth || g.clientWidth;
+//     y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+//     console.log(x);
+//     console.log(y);
+
+//     svg.attr("width", x)
+//         .attr("height", y);
+// }
+// window.onresize = updateWindow;
+
+// 			// var svg = d3.select("body")
+// 			// 			.append("svg")
+// 			// 			.attr("width",width)
+// 			// 			.attr("height",height);
+
+// 			var padding = {left:30, right:30, top:20, bottom:20};
+// 			var dataset = [10,20,30,40,50,10,20];
+// 			var color = ["#1E3140","#19515C","#10736F","#2C9677","#60B773","#A1D668","#EEEF61"];
+// 			var ordinal2 = d3.scale.ordinal()
+//              					  .domain(dataset)
+//              					  .range(color);
+
+
+//          //x 轴使用序数比例尺，y 轴使用线性比例尺。要注意两个比例尺值域的范围。
+// 			var xScale = d3.scale.ordinal()
+// 								 .domain(d3.range(dataset.length))
+// 								 .rangeRoundBands([0, width - padding.left-padding.right]);
+// 			var yScale = d3.scale.linear()
+// 								 .domain([0,d3.max(dataset)])
+// 								 .range([height - padding.top - padding.bottom, 0]);
+
+// 		// x 轴刻度的方向向下，y 轴的向左。
+// 			var xAxis = d3.svg.axis()
+// 			                  .scale(xScale)
+// 			                  .orient("bottom");
+// 			var yAxis = d3.svg.axis()
+// 							  .scale(yScale)
+// 							  .orient("left");
+
+//          //添加矩形和文字元素
+//          	var rectPadding = 4;
+//          	// var rects = svg.selectAll(".myRect")
+//          	// 			  .data(dataset)
+//          	// 			  .enter()
+//          	// 			  .append("rect")
+//          	// 			  .attr("class","myRect")
+//          	// 			  .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+//          	// 			  .attr("x",function(d,i){
+//          	// 			  	return xScale(i) + rectPadding/2;
+//          	// 			  })
+//          	// 			  .attr("width", xScale.rangeBand()-rectPadding)
+//          	// 			  .attr("y",function(d){
+//          	// 			  	var min = yScale.domain()[0];
+//          	// 			  	return yScale(min);
+//          	// 			  })
+//          	// 			  .attr("height",function(d){
+//          	// 			  	return 0;
+//          	// 			  })
+//          	// 			  .attr("fill","#fff")
+//       				//       .transition()
+//          	// 			  .delay(function(d,i){
+//          	// 			  	return i*200;
+//          	// 			  })
+//          	// 			  .duration(1000)
+//          	// 			  .ease("bounce")
+//          	// 			  .attr("y",function(d){
+//          	// 			    	return yScale(d)
+//          	// 			  })
+//          	// 			  .attr("height", function(d){
+//          	// 			    	return height - padding.top - padding.bottom - yScale(d)
+//          	// 			  })
+//          	// 			  .attr("fill",function(d){
+//  		       //      		  return ordinal2(d);
+//       				//        })
+
+
+//       		var rects = svg.selectAll(".myRect")
+// 						   .data(dataset)
+// 						   .enter()
+// 						   .append("rect")
+// 						   .attr("class","myRect")
+// 					       .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+// 						    .attr("x", function(d,i){
+// 								return xScale(i) + rectPadding/2;
+// 							} )
+// 							.attr("y",function(d){
+// 								return yScale(d);
+// 							})
+// 							.attr("width", xScale.rangeBand() - rectPadding )
+// 							.attr("height", function(d){
+// 								return height - padding.top - padding.bottom - yScale(d);
+// 							})
+// 							.attr("fill","#c1d82f")		//填充颜色不要写在CSS里
+//          				    .on("mouseover",function(d,i){
+//          				    	d3.select(this)
+//          				  		  .attr("fill","#ff4c4c");
+//          				    })
+//          				    .on("mouseout",function(d,i){
+// 								d3.select(this)
+// 									.transition()
+// 							        .duration(200)
+//          				            .attr("fill","#fbb034");
+//          				    });
+
+//          	//动态效果
+//          	var texts = svg.selectAll(".myText")
+//          				   .data(dataset)
+//          				   .enter()
+//          				   .append("text")
+//          				   .attr("class","myText")
+//          				   .attr("transform","translate(" +padding.left + "," + padding.top + ")" )
+//          				   .attr("x",function(d,i){
+//          				   		return xScale(i) + rectPadding/2;
+//          				   })
+//          				   .attr("y",function(d){
+//          				   		var min = yScale.domain()[0];
+//          				   	    return yScale(min);
+//          				   })
+//          				   .transition()
+//          				   .delay(function(d,i){
+//          				   		return i*200;
+//          				   })
+//          				   .duration(1000)
+//          				   .ease("bounce")//elastic.  circle
+//          				   .attr("y",function(d){
+//          				   		return yScale(d);
+//          				   })
+//          				   .attr("dx",function(){
+//          				   		return (xScale.rangeBand() - rectPadding)/2;
+//        					   })
+//          				   .attr("dy",function(d){
+//          					   	return 20;
+//          				   })
+//          				   .attr("fill","#fff")
+//          				   .attr("text-anchor","middle")
+//          				   .text(function(d){
+//          				   		return d;
+//          				   });
+
+//          	//添加坐标轴元素
+//          	svg.append("g")
+//          	   .attr("class","axis")
+//          	   .attr("transform","translate(" + padding.left + "," +(height - padding.bottom)+")")
+//          	   .call(xAxis);
+
+//          	svg.append("g")
+//          	   .attr("class","axis")
+//          	   .attr("transform","translate("+padding.left + "," + padding.top + ")")
+//          	   .call(yAxis);
+
+
+         	
+
+//制作pie chart
+    //             var width = 400;
+    //             var height = 400;
+ 			// 	var svg = d3.select("body")
+ 			// 				.append("svg")
+ 			// 				.attr("width",width)
+ 			// 				.attr("height",height);
+				// //将数据转换为layout数据
+	   //          var dataset = [2.3, 3.3, 4.2, 0.2, 4.4, 2.4, 2.2];
+	   //          //var color = d3.scale.category10();
+
+	   //          var color = ["#1E3140","#19515C","#10736F","#2C9677","#60B773","#A1D668","#EEEF61"];
+	   //          var ordinal = d3.scale.ordinal()
+	   //          					  .domain(dataset)
+	   //          					  .range(color);
+
+				// var pie = d3.layout.pie();
+				// var piedata = pie(dataset);
+			 //    //弧生成器
+			 //    var outerRadius = 150;//外半径
+			 //    var innerRadius = 50;//内半径，0=没有空白
+
+			 //    var arc = d3.svg.arc()   //弧生成器
+			 //                    .innerRadius(innerRadius)
+			 //                    .outerRadius(outerRadius);
+
+
+			 //    //弧生成器返回的结果赋值给 arc。此时，arc 可以当做一个函数使用，把 piedata 作为参数传入，即可得到路径值。接下来，可以在 SVG 中添加图形元素了。先在 <svg> 里添加足够数量（5个）个分组元素（g），每一个分组用于存放一段弧的相关元素。接下来对每个 <g> 元素，添加 <path> 。
+			 //    var arcs =svg.selectAll("g")
+			 //    			 .data(piedata)
+			 //                 .enter()
+			 //                 .append("g")
+			 //                 .attr("transform","translate("+(width/2)+","+(width/2)+")");
+
+				// arcs.append("path")
+				// .attr("fill",function(d,i){
+				// 	return ordinal(i);
+				// })
+				// .attr("d",function(d){
+				// 	return arc(d);
+				// });
+
+
+
+			 //    //因为 arcs 是同时选择了 5 个 <g> 元素的选择集，所以调用 append(“path”) 后，每个 <g> 中都有 <path> 。路径值的属性名称是 d，调用弧生成器后返回的值赋值给它。要注意，arc(d) 的参数 d 是被绑定的数据。另外，color 是一个颜色比例尺，它能根据传入的索引号获取相应的颜色值，定义如下。var color = d3.scale.category10();   //有十种颜色的颜色比例尺
+
+			 //    //然后在每一个弧线中心添加文本。arc.centroid(d) 能算出弧线的中心。要注意，text() 里返回的是 d.data ，而不是 d 。因为被绑定的数据是对象，里面有 d.startAngle、d.endAngle、d.data 等，其中 d.data 才是转换前的整数的值。
+			 //    arcs.append("text")
+			 //        .attr("transform",function(d){
+			 //        	return "translate("+arc.centroid(d)+")";
+			 //        })
+			 //        .attr("text-anchor","middle")
+			 //        .text(function(d){
+			 //        	return d.data;
+			 //        });
+
+
+			 //    console.log(dataset);
+				// console.log(piedata);
+
+
+
+
+
+// //力导向图的制作
+// 						var nodes = [{name:"暖男"},{name:"死宅"},{name:"土豪"},{name:"我"},{name:"女神"},{name:"萌妹"},{name:"二次元"},{name:"学习"}];
+
+// 						var edges = [{source:0, target:4},{source:0, target:5},
+// 									 {source:03, target:7},
+// 									 {source:1, target:4},{source:1, target:5},{source:1, target:6},
+// 									 {source:2, target:4},
+// 									 {source:5, target:2}];
+
+
+// 				        var color = ["#1E3140","#19515C","#10736F","#2C9677","#60B773","#A1D668","#EEEF61","#EEEF61","#EE6661"];
+// 				        var ordinal = d3.scale.ordinal()
+// 				            					  .domain(nodes)
+// 				            					  .range(color);
+
+
+// 						 var width = 1000;
+// 						 var height = 1000;
+
+// 						 var svg = d3.select("body")
+// 						 			 .append("svg")
+// 						 			 .attr("width",width)
+// 						 			 .attr("height",height);
+
+// 						 var force = d3.layout.force()
+// 						 			   		  .nodes(nodes)
+// 						 			   		  .links(edges)
+// 						 			   		  .size([600,600])
+// 										  	  .linkDistance(200)	//指定连线长度
+// 											  .charge(-1000);	//相互之间的作用力
+
+// 						force.start();
+
+// 						console.log(nodes);
+// 						console.log(edges);
+
+// 						//添加连线
+// 						var svg_edges = svg.selectAll("line")
+// 										   .data(edges)
+// 										   .enter()
+// 										   .append("line")
+// 										   .style("stroke","#00cc00")
+// 										   .style("stroke-width",1);
+
+// 						var color = d3.scale.category20();
+
+// 						//添加节点
+// 						var svg_nodes = svg.selectAll("circle")
+// 										   .data(nodes)
+// 										   .enter()
+// 										   .append("circle")
+// 										   .attr("r",10)
+// 										   .style("fill",function(d,i){
+// 												return ordinal(i);
+// 											})
+// 										   .call(force.drag);//使得节点能够拖动
+
+// 						//添加描述节点文字
+// 						var svg_texts = svg.selectAll("text")
+// 										  .data(nodes)
+// 										  .enter()
+// 										  .append("text")
+// 										  .style("fill","#002200")
+// 										  .attr("dx",20)
+// 										  .attr("dy",6)
+// 										  .text(function(d){
+// 										  	return d.name;
+// 										  })
+
+// 						//对于每一个时间间隔,更新连线坐标\节点坐标\文字坐标
+// 						force.on("tick",function(){
+
+// 								svg_edges.attr("x1",function(d){return d.source.x;})
+// 								         .attr("y1",function(d){return d.source.y;})
+// 								         .attr("x2",function(d){return d.target.x;})
+// 								         .attr("y2",function(d){return d.target.y;})
+
+// 								svg_nodes.attr("cx",function(d){return d.x;})
+// 										 .attr("cy",function(d){return d.y;})
+
+// 								svg_texts.attr("x",function(d){return d.x;})
+// 										 .attr("y",function(d){return d.y;});
+// 						});
+
+
+
+
+
+
+
+
+//弦图
+						// var brain_components = ["咖啡" , "睡觉" , "冰淇淋" , "陈坤" , "吴彦祖" ];
+						// var population = [
+						// 		[20,45,23,123,23],
+						// 		[29,30,3,23,23],
+						// 		[23,23,40,11,23],
+						// 		[22,3,145,50,23],
+						// 		[23,33,232,132,63]
+						// ];
+						// //2.转换数据，并输出转换后的数据
+
+						// var chord_layout = d3.layout.chord()
+						// 					 .padding(0.06)	                //节点之间的间隔
+						// 					 .sortSubgroups(d3.descending)	//排序
+						// 					 .matrix(population);
+						// var groups = chord_layout.groups();
+						// var chords = chord_layout.chords();
+
+						// console.log(groups);
+						// console.log(chords);
+
+						// var width =600;
+						// var height = 600;
+						// var innerRadius = width*0.4;
+						// var outerRadius = width*0.44;
+
+
+				  //       var color = ["#1E3140","#19515C","#10736F","#2C9677","#60B773","#A1D668","#EEEF61","#EEEF61","#EE6661"];
+				  //       var ordinal = d3.scale.ordinal()
+				  //           				  .domain(brain_components)
+				  //           				  .range(color);
+				  //       var svg = d3.select("body").append("svg")
+				  //       			.attr("width",width)
+				  //       			.attr("height",height)
+				  //       			.append("g")
+				  //       			.attr("transform","translate("+width/2+","+height/2+")");
+
+
+				  //       //绘制节点,即分组
+				  //       var outer_arc =  d3.svg.arc()
+						// 				  	   .innerRadius(innerRadius)
+						// 					   .outerRadius(outerRadius);
+				  //       var g_outer = svg.append("g");
+
+				  //       g_outer.selectAll("path")
+				  //       	   .data(groups)
+				  //       	   .enter()
+				  //       	   .append("path")
+				  //       	   .style("fill",function(d,i){
+						// 						return ordinal(i);
+						// 			  })
+				  //       	   .style("stroke",function(d,i){
+				  //       	   		return ordinal(i);
+				  //       	   })
+				  //       	   .attr("d",outer_arc);
+
+
+
+				  //       //然后就是节点的文字（即城市名称），有两个地方要特别注意。each()：表示对任何一个绑定数据的元素，都执行后面的无名函数 function(d,i) ，函数体里做两件事：计算起始角度和终止角度的平均值，赋值给 d.angle 。将 city_name[i] 城市名称赋值给 d.name 。transform 的参数：用 translate 进行坐标变换时，要注意顺序： rotate -> translate（先旋转再平移）。 此外，( ( d.angle > Math.PI*3/4 && d.angle < Math.PI*5/4 ) ? "rotate(180)" : "")意思是，当角度在 135° 到 225° 之间时，旋转 180°。不这么做的话，下方的文字是倒的。
+						// g_outer.selectAll("text")
+						// 		.data(groups)
+						// 		.enter()
+						// 		.append("text")
+						// 		.each( function(d,i) { 
+						// 			d.angle = (d.startAngle + d.endAngle) / 2; 
+						// 			d.name = brain_components[i];
+						// 		})
+						// 		.attr("dy",".35em")
+						// 		.attr("transform", function(d){
+						// 			return "rotate(" + ( d.angle * 180 / Math.PI ) + ")" +
+						// 				   "translate(0,"+ -1.0*(outerRadius+10) +")" +
+						// 				    ( ( d.angle > Math.PI*3/4 && d.angle < Math.PI*5/4 ) ? "rotate(180)" : "");
+						// 		})
+						// 		.text(function(d){
+						// 			return d.name;
+						// 		});
+
+
+
+				  //       //绘制内部
+				  //       var inner_chord = d3.svg.chord()
+				  //       					    .radius(innerRadius);
+
+				  //       		svg.append("g")
+						// 			.attr("class", "chord")
+						// 		    .selectAll("path")
+						// 			.data(chords)
+						// 		    .enter()
+						// 			.append("path")
+						// 			.attr("d", inner_chord )
+						// 		    .style("fill",function(d,i){
+						// 				  return ordinal(d.source.index);
+						// 		    })
+						// 			.style("opacity", 0.3)
+						//             .on("mouseover",function(d,i){
+						// 					d3.select(this)
+						// 						.style("opacity", 0.7)
+						// 						.style("fill",function(d,i){
+						// 				  return ordinal(d.source.index);
+						// 		    });
+
+						// 				})
+						//             .on("mouseout", function(d,i){
+						//            		d3.select(this)
+						//            		  .transition()
+						//            		  .duration(400)
+						//            		  .style("opacity", 0.3)
+						//            		  .style("fill",function(d,i){
+						// 				  return ordinal(d.source.index);//跟之前不一样啊啊啊啊啊index
+						// 		    })
+
+				  //          })
+
+
+//json
+// 			var str = '{"name":"Bill","age":23,"money":23303003}';
+// 			var obj1 = eval("("+str+")");
+// 			//eval() 函数的参数是一个字符串，其作用是直接执行其中的 JavaScript 代码。
+// 			//JSON 字符串是被大括号（“{}”）包围的，直接放到 eval() 会被当成语句块来执行，因此要在两旁加上括号，使其变成表达式。
+// 			var obj = JSON.parse(str,fun);
+
+// 			eval(console.log(str));
+
+// 			function fun(name,value){
+// 				console.log(name+" : "+value);
+// 				return value;
+
+// 			}
+
+// 			var obj2 = JSON.parse(str,funny);
+
+// 			function funny(name,value){
+// 				if(name == "age"){
+// 					value = 13;
+// 				}
+// 				return value;
+// 			}
+// 			console.log(obj2);
+
+// //JSON.stringify() 能够将 JavaScript 值转换成 JSON 字符串。JSON.stringify() 生成的字符串可以用 JSON.parse() 再还原成 JavaScript 值。
+// //JSON.stringify(value[, replacer[, space]])
+// 			var json = JSON.stringify(obj2);
+// 			console.log(json);
+
+
+// 			var obj3 ={
+// 				name:"Cindy",
+// 				age:26,
+// 				nationnality:"China",
+// 				school:undefined,
+// 				add:function(){
+// 					this.age++;
+// 				},
+// 				friends:[function(){}]
+// 			};//如果存在不符合 JSON 语法的值，则自动忽略，例如 undefined 和 function。如果数组里有函数，则转换为 null。
+			
+// 			var json2 = JSON.stringify(obj3);
+// 			console.log(json2); 
+
+
+// 			var json3 = JSON.stringify(obj3,interesting);
+// 			function interesting(name,value){
+// 				console.log(name+" : " +value);
+// 				return value;
+// 			}
+
+// 			//如果是数组，则只有数组中存在名称才能够被转换，且转换后顺序与数组中的值保持一致。
+// 			var json4 = JSON.stringify(obj3,["name","age"]);
+// 			console.log(json4);
+
+// 			//space 是用于排版的，可在 JSON 中插入制表符能使其更加美观。当然，也可以插入别的字符。
+// 			var json5 = JSON.stringify(obj3,["name","age"],"\t");//Formfeed水平制表
+// 			console.log(json5);
+
+// 			var json6 = JSON.stringify(obj3,["name","age"],"\n");//Formfeed改行
+// 			console.log(json6);
+
+// 			var json7 = JSON.stringify(obj3,["name","age"],"\b");//backspace
+// 			console.log(json7);
+
+// 			var json8 = JSON.stringify(obj3,["name","age"],"");
+// 			console.log(json8);
+
+// 			var json9 = JSON.stringify(obj3,["name","age"],"\$");
+// 			console.log(json9);
+
+// 			var json10 = JSON.stringify(obj3,["name","age"],"\f");//Formfeed
+// 			console.log(json10);
+
+// 			var json11 = JSON.stringify(obj3,["name","age"],"\r");//Carriage return 回车返回
+// 			console.log(json11);
+
+// 			//var json12 = JSON.stringify(obj3,["name","age"],"\uhhhh");//Four-hexadecimal-digits (uhhhh)
+// 			//console.log(json12);
+
+
+
+
+//Ajax&json
+
+			// function CreateXHR(){
+			//     if (window.XMLHttpRequest)
+			//     {
+			//         //对浏览器 IE7+, Firefox, Chrome, Opera, Safari
+			//         return new XMLHttpRequest();
+			//     }
+			//     else
+			//     {
+			//         //对浏览器 IE6, IE5
+			//         return new ActiveXObject("Microsoft.XMLHTTP");
+			//     }
+			// }
+
+
+			// var xmlhttp;
+			// xmlhttp = CreateXHR();
+
+			// //假设服务器端有一个文件 test.json，则异步地请求文件，并输出到控制台的代码如下。
+			// xmlhttp.open("GET","test.json",true);
+			// xmlhttp.send();
+
+			// xmlhttp.onreadystatechange = function(){
+			//     if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			//         var jsonstr = xmlhttp.responseText;
+			//         console.log(jsonstr);
+			//     }
+			// }
+			// //xmlhttp.readyState 存有 XMLHttpRequest 的状态，有五个值：
+
+			// // 0: 请求未初始化
+			// // 1: 服务器连接已建立
+			// // 2: 请求已接收
+			// // 3: 请求处理中
+			// // 4: 请求已完成，且响应已就绪
+			// // xmlhttp.staus 的值为请求结果，200 表示“OK”，404 表示未找到页面。
+
+
+			// //因此，要时刻记住 d3.json 是异步请求，像这样的代码是不可取的：
+			// // var str;
+
+			// // d3.json("test.json",function(error,data){
+			// //     str = data;
+			// // });
+
+			// // //输出undefined，因为这条代码执行时，d3.json 尚未执行完毕
+			// // console.log(str);
+
+//GeoJSON 的最外层是一个单独的对象（object）。这个对象可表示：
+	// 几何体（Geometry）。
+	// 特征（Feature）。
+	// 特征集合（FeatureCollection）。
+// 最外层的 GeoJSON 里可能包含有很多子对象，每一个 GeoJSON 对象都有一个 type 属性，表示对象的类型，type 的值必须是下面之一。
+	// Point：点。
+	// MultiPoint：多点。
+	// LineString：线。
+	// MultiLineString：多线。
+	// Polygon：面。
+	// MultiPolygon：多面。
+	// GeometryCollection：几何体集合。
+	// Feature：特征。
+	// FeatureCollection：特征集合。
+		// 	{
+		// 		"type":"Point",
+		// 		"coordinates": [-105,56]
+		// 	}
+
+		// 	{
+		// 		"type":"LineString",
+		// 		"coordinates":[[-102,34],[213,23]]
+		// 	}
+
+		// 	{
+		// 		"type":"Polygon",
+		// 		"coordinates":[[ [30, 0], [31, 0], [31, 5], [30, 5], [30, 0] ]]
+		// 	}
+
+		// 	{
+		// 	    "type": "GeometryCollection",
+		// 	    "geometries": [
+		// 	        {
+		// 	            "type": "Point",
+		// 	            "coordinates": [100, 40]
+		// 	        },
+		// 	        {
+		// 	            "type": "LineString",
+		// 	            "coordinates": [ [100, 30], [100, 35] ]
+		// 	        }
+		// 	    ]
+		// 	}
+		// //如果 type 的值为 Feature（特征），那么此特征对象必须包含有变量 geometry，表示几何体，geometry 的值必须是几何体对象。此特征对象还包含有一个 properties，表示特性，properties 的值可以是任意 JSON 对象或 null。例如：
+		// {
+		// 	"type":"Feature",
+		// 	"properties":{
+		// 		"name":"Beijing"
+		// 	},
+		// 	"geometry":{
+		// 		"type":"Point",
+		// 		"coordinates": [ 116.3671875, 39.977120098439634]
+		// 	}
+		// }
+
+// // cluster 集群图。
+			
+// 			//D3 已经基本上为我们准备好了绘制的函数：d3.svg.diagonal() 。这是一个对角线生成器，只需要输入两个顶点坐标，即可生成一条贝塞尔曲线。创建一个对角线生成器：
+
+
+// 			//projection() 是一个点变换器，默认是 [ d.x , d.y ]，即保持原坐标不变，如果写成 [ d.y , d.x ] ，即是说对任意输入的顶点，都交换 x 和 y 坐标。
+
+
+
+
+// 			//d3.json() 函数后面跟一个无名函数 function(error) ，参数 root 是读入的数据。后两行代码调用 cluster 转换数据，保存到变量 nodes 和 links 中。然后输出转换后的数据nodes 中有各个节点的子节点（children）、深度（depth）、名称（name）、位置（x，y）信息，其中名称（name）是 json 文件中就有的属性。links 中有连线两端（ source , target ）的节点信息。
+
+// 			var width = 700,
+// 			    height = 700;
+
+// 			var cluster = d3.layout.cluster()
+// 			    .size([width-200, height - 400]);
+
+// 			var diagonal = d3.svg.diagonal()
+// 			    .projection(function(d) { return [d.y, d.x]; });
+
+// 			var svg = d3.select("body").append("svg")
+// 			    .attr("width", width)
+// 			    .attr("height", height)
+// 			  .append("g")
+// 			    .attr("transform", "translate(100,0)");
+			    
+
+
+// 			d3.json("me.json", function(error, root) {
+				
+// 			  var nodes = cluster.nodes(root);
+// 			  var links = cluster.links(nodes);
+			  
+// 			  console.log(nodes);
+// 			  console.log(links);
+
+// 			  var link = svg.selectAll(".link")
+// 			      .data(links)
+// 			      .enter()
+// 			      .append("path")
+// 			      .attr("class", "link")
+// 			      .attr("d", diagonal);
+
+// 			  var node = svg.selectAll(".node")
+// 			      .data(nodes)
+// 			      .enter()
+// 			      .append("g")
+// 			      .attr("class", "node")
+// 			      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+
+// 			  node.append("circle")
+// 			      .attr("r", 4.5);
+
+// 			  node.append("text")
+// 			      .attr("dx", function(d) { return d.children ? -8 : 8; })
+// 			      .attr("dy", 3)
+// 			      .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+// 			      .text(function(d) { return d.name; });
+// 			});
+
+// Tree	树状图。	
+
+
+			// var width = 700,
+			// height = 700;
+
+			// var tree = d3.layout.tree()
+			// 	.size([width-200, height-400])
+			// 	.separation(function(a, b) { return (a.parent == b.parent ? 1 : 2); });
+
+			// var diagonal = d3.svg.diagonal()
+			// 	.projection(function(d) { return [d.y, d.x]; });
+
+			// var svg = d3.select("body").append("svg")
+			// 	.attr("width", width)
+			// 	.attr("height", height)
+			// 	.append("g")
+			// 	.attr("transform", "translate(40,0)");
+
+
+
+			// d3.json("me.json", function(error, root) {
+
+			// 	var nodes = tree.nodes(root);
+			// 	var links = tree.links(nodes);
+				
+			// 	console.log(nodes);
+			// 	console.log(links);
+				
+			// 	var link = svg.selectAll(".link")
+			// 	  .data(links)
+			// 	  .enter()
+			// 	  .append("path")
+			// 	  .attr("class", "link")
+			// 	  .attr("d", diagonal);
+				
+			// 	var node = svg.selectAll(".node")
+			// 	  .data(nodes)
+			// 	  .enter()
+			// 	  .append("g")
+			// 	  .attr("class", "node")
+			// 	  .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+				
+			// 	node.append("circle")
+			// 	  .attr("r", 4.5);
+			// 	//三目运算符
+
+			// 		// const x = 20;
+			// 		// let answer;
+			// 		//     if (x > 10) {
+			// 		//     answer = 'greater than 10';
+			// 		// } else {
+			// 		//     answer = 'less than 10';
+			// 		// }
+			// 		// 简写为：
+
+			// 		// const answer = x > 10 ? 'greater than 10' : 'less than 10';
+
+
+			// 	node.append("text")
+			// 	  .attr("dx", function(d) { return d.children ? -8 : 8; })
+			// 	  .attr("dy", 3)
+			// 	  .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+			// 	  .text(function(d) { return d.name; })
+			// 	  .on("mouseover",function(d,i){
+			// 			d3.select(this)
+			// 			  .style("fill","#55aa68")
+			// 			  .style("font-size","1.4em");
+
+
+			// 			  // .style("font-style","oblique")
+			// 			  //.style("font-variant","small-caps");
+
+			// 		})
+			// 	   .on("mouseout",function(d,i){
+			// 			d3.select(this)
+			// 			  .style("fill","#000")
+			// 			  .style("font-size","1em");
+			// 		});
+			// 	});
+
+
+
+
+
+
+
+
+
+// //Pack 打包图
+// 			var width  = 800;
+// 			var height = 800;
+			
+// 			var pack = d3.layout.pack()
+// 			    			.size([ width, height ])
+// 			    			.radius(40);
+			
+// 			var svg = d3.select("body").append("svg")
+// 			    .attr("width", width)
+// 			    .attr("height", height)
+// 			    .append("g")
+// 			    .attr("transform", "translate(0,0)");
+			
+			
+// 			d3.json("me.json", function(error, root) {
+				
+// 				var nodes = pack.nodes(root);
+// 				var links = pack.links(nodes);
+				
+// 				console.log(nodes);
+// 				console.log(links);
+				
+// 				svg.selectAll("circle")
+// 					.data(nodes)
+// 					.enter()
+// 					.append("circle")
+// 					.attr("fill","#10736F")
+// 					.attr("fill-opacity","0.4")
+// 					.attr("cx",function(d){
+// 						return d.x;
+// 					})
+// 					.attr("cy",function(d){
+// 						return d.y;
+// 					})
+// 					.attr("r",function(d){
+// 						return d.r;
+// 					})
+// 					.on("mouseover",function(d,i){
+// 						d3.select(this)
+// 							.attr("fill","#A1D668");
+// 					})
+// 					.on("mouseout",function(d,i){
+// 						d3.select(this)
+// 							.attr("fill","#10736F");
+// 					});
+				
+// 				svg.selectAll("text")
+// 							  .data(nodes)
+// 							  .enter()
+// 							  .append("text")
+// 							  .attr("font-size","10px")
+// 							  .attr("fill","#fff")
+// 							  .attr("fill-opacity",function(d){
+// 								  if(d.depth == 2)
+// 									  return "1";
+// 								  else
+// 									  return "0.1";
+// 							  })
+// 							  .attr("x",function(d){ return d.x; })
+// 							  .attr("y",function(d){ return d.y; })
+// 							  .attr("dx",-12)
+// 							  .attr("dy",1)
+// 							  .text(function(d){ return d.name; });
+				
+// 			});
+
+
+
+// //【可视化应用 – 权重篇 1.0】气泡图
+
+// 				var width = 700;
+// 				var height = 700;
+
+// 				var svg= d3.select("body")
+// 						   .append("svg")
+// 						   .attr("width",width)
+// 						   .attr("height",height);
+// 				var pack = d3.layout.pack()
+// 									.size([width,height])
+// 									.sort(null)  //禁用排序方法//不排序
+// 									.value(function(d){
+// 										return d.weight; ////节点的权重，取每一个节点对象的 weight
+// 									})	
+// 				                    .padding(2);
+
+// 				d3.json("data.json",function(error,root){
+// 					var nodes = pack.nodes(root);
+// 					console.table(nodes);
+// 					var color = d3.scale.category20c();
+
+// 					var bubbles = svg.selectAll(".bubble")
+// 									 .data(nodes.filter(function(d){
+// 									 		return !d.children;
+// 									 	}))
+// 									 .enter()
+// 									 .append("g")
+// 									 .attr("class","bubble");
+
+// 					bubbles.append("circle")
+// 						   .style("fill",function(d,i){
+// 						   		return color(i);
+// 						   })
+// 						   .attr("cx",function(d){
+// 						   		return d.x;
+// 						   })
+// 						   .attr("cy",function(d){
+// 						   		return d.y;
+// 						   })
+// 						   .attr("r",function(d){
+// 						   		return d.r;
+// 						   })
+// 		   				   .on("mouseover",function(d,i){
+// 		   						d3.select(this)
+// 		   						  .style("opacity",1);
+// 		   					})
+// 		   				    .on("mouseout",function(d,i){
+// 		   						d3.select(this)
+// 		   						  .style("opacity",0.4);
+// 		   					});
+
+// 					bubbles.append("text")
+// 						   .attr("x",function(d){
+// 						   		return d.x;
+// 						   })
+// 						   .attr("y",function(d){
+// 						   	 	return d.y;
+// 						   })
+// 						   .text(function(d){
+// 						   		return d.name;
+// 						   });
+// 				});
+
+
+// //map 地图
+// 				var width = 1000;
+// 				var height = 1000;
+
+// 				var svg = d3.select("body").append("svg")
+// 							.attr("width",width)
+// 							.attr("height",height)
+// 							.append("g")
+// 							.attr("transform","translate(0,0)");
+
+// 				var color = d3.scale.category20();
+
+// 				var projection = d3.geo.mercator()
+// 				//center() 设定地图的中心位置，[107,31] 指的是经度和纬度。
+// 									   .center([107,31])
+// 			    //scale() 设定放大的比例。
+// 									   .scale(850)
+// 									   .translate([width/2,height/2]);
+// 				console.table(projection);
+// 				var path = d3.geo.path()//地理路径生成器
+// 								 .projection(projection);
+// 								 //projection() 是设定生成器的投影函数，把上面定义的投影传入即可。以后，当使用此生成器计算路径时，会自己加入投影的影响。
+
+// 				var force = d3.layout.force().size([width,height]);
+
+// 				//用 d3.json() 读取文件，后面两句是用于检测错误，输出读取数据。
+// 				d3.json("schina.json",function(error,root){
+// 					if(error)
+// 						return console.error(error);
+// 				    console.log(root.features);
+
+// 				    svg.selectAll("path")
+// 				       .data(root.features)
+// 				       .enter()
+// 				       .append("path")
+// 				       .attr("stroke","#fff")
+// 				       .attr("stroke-width",1)
+// 				       .attr("fill",function(d,i){
+// 				       		return color(i);
+// 				       })
+// 				       .style("opacity",0.4)
+// 				       .attr("d",path)//使用地理路径生成器
+// 				       //接下来，就是给 svg 中添加 path 元素。本例中，每一个 path 表示一个省。要注意 attr(“d”,path) 这一行代码，它相当于：
+
+// 								// .attr("d",funtion(d){
+// 								//     return path(d);
+// 								// })
+
+// 				       .on("mouseover",function(d,i){
+// 				       		d3.select(this)
+// 				       		  .attr("fill","#10736F")
+// 				       		  .style("opacity",1);
+// 				       })
+// 				       .on("mouseout",function(d,i){
+// 				       		d3.select(this)
+// 				       		  .attr("fill",color(i))
+// 				       		  .style("opacity",0.4);
+
+// 				       });
+// 				})
+
+
+
+// //可拖动的map
+			
+// 			var width = 1000;
+// 			var height =1000;
+
+// 			var svg = d3.select("body").append("svg")
+// 										.attr("width",width)
+// 										.attr("height",height)
+// 										.append("g")
+// 										.attr("transform","translate(0,0)");
+
+// 			var projection = d3.geo.mercator()
+// 								   .center([107,31])
+// 								   .scale(850)
+// 								   .translate([width/2,height/2]);
+// 			//projection 函数是用于将三维地图的坐标投影到二维所用的投影函数。
+// 			var path = d3.geo.path()
+// 							 .projection(projection);
+
+// 			var force = d3.layout.force().size([width,height])//指定作用域范围
+// 										 .charge([-400]);//指定作用力
+
+// 			var color = d3.scale.category20();
+
+// 			d3.json("schina.json",function(error,root){
+// 				if(error)
+// 					return console.error(error);
+// 				console.table(root.features);
+
+// 				var nodes = [];
+// 				var links = [];
+// 				//对于 root.features 中存有每一个省的数据， root.features.forEach() 即对每一个省的数据，执行 function 无名函数，函数里计算出各省的中点，保存在 centroid.x 和 centroid.y 中，再把其他信息赋值给 centroid.feature，最后插入到 nodes 中。
+// 				root.features.forEach(function(d,i){
+// 					var centroid = path.centroid(d);
+// 					centroid.x = centroid[0];
+// 					centroid.y = centroid[1];
+// 					centroid.feature = d;
+// 					nodes.push(centroid);
+// 				});
+// 				//对 nodes 中的顶点进行三角剖分，即用三角形来连接各顶点，结果保存在 triangles 中。
+// 				var triangles = d3.geom.voronoi().triangles(nodes);
+				
+// 				triangles.forEach(function(d,i){
+// 					links.push( edge( d[0] , d[1] ) );
+// 					links.push( edge( d[1] , d[2] ) );
+// 					links.push( edge( d[2] , d[0] ) );
+// 				});
+// 				//将三角形的各边存到 links 变量中。其中的 edge 函数的实现为：
+
+// 				console.table(nodes);
+// 				console.table(links);
+
+// 				//对 force 的各参数进行设定。
+// 				force.gravity(0)
+// 					 .charge(0)
+// 					 .nodes(nodes)
+// 					 .links(links)
+// 					 .linkDistance(function(d){
+// 					 	return d.distance;
+// 					 })
+// 					 .start();
+
+// 				//绘制各顶点，即中国各省。其中要注意，transorm是完全相反的两个平移函数，不错，这么做就是为了移过去，再移回来，即初始时显示的是各省拼成的完整的地图且显示在最初设定的位置，因为拖拽的过程中变化的量是 d.x 和 d.y ，drag调用 force.drag 函数。
+// 				//绘制连接各省的线条。
+// 				var node = svg.selectAll("g")
+// 							  .data(nodes)
+// 							  .enter()
+// 							  .append("g")
+// 							  .attr("transform",function(d){
+// 							  		return "translate("+-d.x+","+-d.y+")";
+// 							  })
+// 							  .call(force.drag)
+// 							  .append("path")
+// 							  .attr("transform",function(d){
+// 							  	return "translate("+d.x+","+d.y+")";
+// 							  })
+// 							  .attr("stroke","#fff")
+// 							  .attr("stroke-width",0.3)
+// 							  .attr("fill",function(d,i){
+// 							  	return color(i);
+// 							  })
+// 							  .style("opacity",0.4)
+// 							  .attr("d",function(d){
+// 							  	return path(d.feature);
+// 							  })
+// 						       .on("mouseover",function(d,i){
+// 						       		d3.select(this)
+// 						       		  .attr("fill","#10736F")
+// 						       		  .style("opacity",1);
+// 						       })
+// 						       .on("mouseout",function(d,i){
+// 						       		d3.select(this)
+// 						       		  .attr("fill",color(i))
+// 						       		  .style("opacity",0.4);
+
+// 						       });
+
+// 				var link =svg.selectAll("line")
+// 							 .data(links)
+// 							 .enter()
+// 							 .append("line")
+// 							 .attr("stroke","#10736F")
+// 							 .style("opacity",0.4)
+// 							 .attr("stroke-width",0.4)
+// 							 .attr("x1",function(d){
+// 							 	return d.source.x;
+// 							 })
+// 							 .attr("y1",function(d){
+// 							 	return d.source.y;
+// 							 })
+// 							 .attr("x2",function(d){
+// 							 	return d.target.x;
+// 							 })
+// 							 .attr("y2",function(d){
+// 							 	return d.target.y;
+// 							 });
+// 			//tick 指的是时间间隔，也就是每一个时间间隔之后就刷新一遍画面，刷新的内容写在后面的无名函数 function 中， function 函数中写上作图的内容。力导向图布局 force 有一个事件 tick，每进行到一个时刻，都要调用它，更新的内容就写在它的监听器里就好。
+// 				force.on("tick",function(){
+// 					link.attr("x1",function(d){
+// 							 	return d.source.x;
+// 							 })
+// 						 .attr("y1",function(d){
+// 						 	return d.source.y;
+// 						 })
+// 						 .attr("x2",function(d){
+// 						 	return d.target.x;
+// 						 })
+// 						 .attr("y2",function(d){
+// 						 	return d.target.y;
+// 						 });
+// 				//平移的参数为 d.x 和 d.y 。
+// 					node.attr("transform",function(d){
+// 							return "translate("+d.x+","+d.y+")";
+// 					});
+// 				});
+// 			});
+
+// 			function edge(a,b){
+// 				var dx =a[0]-b[0], dy=a[1]-b[1];
+// 				return {
+// 					source:a,
+// 					target:b,
+// 					distance: Math.sqrt(dx*dx+dy*dy)
+// 				};
+// 			};
+
+
+
+
+
+
+
+
+
+
+</script>
+	
+</body>  
+</html>  
